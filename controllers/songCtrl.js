@@ -27,13 +27,13 @@ module.exports.getASong = ({params: {SongId}}, res, next) => {
 
 module.exports.addSong = ({body}, res, next) => {
   Song.forge({
-    body
-    // "Title": "Barney and Friends",
-    // "SongLength": 89,
-    // "ReleaseDate": "12/12/2912",
-    // "GenreId": 5,
-    // "ArtistId": 10,
-    // "AlbumId": 33
+    // body
+    "Title": "Barney and Friends",
+    "SongLength": 89,
+    "ReleaseDate": "12/12/2912",
+    "GenreId": 5,
+    "ArtistId": 10,
+    "AlbumId": 33
   })
   .save()
   .then(()=> res.status(201).json({"msg": "Song added"}))
@@ -49,6 +49,25 @@ module.exports.deleteSong = ({params: {SongId}}, res, next) => {
   .then((song)=> res.status(202).json(song))
   .catch((err)=> {
     next(err)
+  })
+}
+
+module.exports.editSongTitle = ({parms: {SongId}}, res, next) => {
+  console.log("trying to edit a song")
+  Song.getSong(SongId)
+  .then((song) => {
+    let editSong = song.toJSON();
+    console.log('edit song', editSong)
+    editSong.Title = "Green Eggs and Ham";
+    Song.forge(editSong)
+    .save()
+    .then(()=> res.status(201).json({"msg": "Song editted"}))
+    .catch((error) => {
+      next(error)
+    })
+  })
+  .catch((err)=> {
+    next(err);
   })
 }
 
