@@ -7,8 +7,8 @@ const songRouter = Router();
 const {getSongs, getASong} = require('../controllers/songCtrl.js');
 // <define routes for getting all songs and a single song>
 
-songRouter.get('/songs/:id', getASong);
 songRouter.get('/songs', getSongs);
+songRouter.get('/songs/:SongId', getASong);
 
 // <stretch: define routes for posting, deleting, editing a song>
 
