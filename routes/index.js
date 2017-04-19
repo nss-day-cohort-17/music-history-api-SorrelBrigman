@@ -11,5 +11,11 @@ router.get('/', function(req, res) {
   res.json({
     "title": "The Music History API",
     "songs": "http://localhost:3000/api/v1/songs",
+    "songsById": "http://localhost:3000/api/v1/songs/:id"
   });
 });
+
+router.use(songRouter);
+
+
+module.exports = router;
