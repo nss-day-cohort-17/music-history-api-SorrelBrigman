@@ -1,7 +1,7 @@
 'use strict'
 
 // <require express Router and require the songs.js router file>
-const {Router} = require(express);
+const {Router} = require('express');
 const songRouter = require('./songs.js');
 const router = Router();
 

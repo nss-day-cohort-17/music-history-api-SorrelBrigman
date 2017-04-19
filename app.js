@@ -10,7 +10,7 @@ let routes = require('./routes/')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
-app.use('api/v1/', routes);
+app.use('/api/v1/', routes);
 // <Setup y our routes middleware>
 // <catch any undefined routes with a 404 middleware>
 
