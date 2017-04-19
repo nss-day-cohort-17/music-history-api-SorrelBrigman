@@ -4,11 +4,13 @@
 const {Router} = require('express');
 const songRouter = Router();
 // <require the songCtrl to get access to its methods>
-const {getSongs, getASong} = require('../controllers/songCtrl.js');
+const {getSongs, getASong, addSong, deleteSong} = require('../controllers/songCtrl.js');
 // <define routes for getting all songs and a single song>
 
 songRouter.get('/songs', getSongs);
 songRouter.get('/songs/:SongId', getASong);
+songRouter.post('/songs/new', addSong);
+songRouter.delete('/songs/:SongId', deleteSong);
 
 // <stretch: define routes for posting, deleting, editing a song>
 
