@@ -52,13 +52,23 @@ module.exports.deleteSong = ({params: {SongId}}, res, next) => {
   })
 }
 
-module.exports.editSong = ({body: {Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId}, params: {SongId}}, res, next) => {
-  console.log("trying to edit a song")
-    Song.where({SongId})
-    .save({Title, SongLength, ReleaseDate, GenreId, ArtistId}, {method: 'update'})
-    .then(()=> res.status(201).json({"msg": "Song editted"}))
-    .catch((error) => {
-      next(error)
+module.exports.editSong = ({params: {SongId}}, res, next) => {
+    console.log("trying to edit a song")
+    Song.getSong(SongId)
+    .then((songFromSeach) => {
+      console.log("thissong", songFromSeach);
+      let editedSong = songFromSeach.toJSON();
+      editedSong.Title = "Silly Bears";
+      console.log("editSong", editedSong)
+      Song.where({SongId})
+      .save(editedSong, {method: 'update'})
+      .then(()=> res.status(201).json({"msg": "Song editted"}))
+      .catch((error) => {
+        next(error)
+      })
+    })
+    .catch((err) => {
+      next(err);
     })
 
 }
