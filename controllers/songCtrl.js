@@ -52,23 +52,15 @@ module.exports.deleteSong = ({params: {SongId}}, res, next) => {
   })
 }
 
-module.exports.editSongTitle = ({parms: {SongId}}, res, next) => {
+module.exports.editSong = ({body: {Title, SongLength, ReleaseDate, GenreId, ArtistId, AlbumId}, params: {SongId}}, res, next) => {
   console.log("trying to edit a song")
-  Song.getSong(SongId)
-  .then((song) => {
-    let editSong = song.toJSON();
-    console.log('edit song', editSong)
-    editSong.Title = "Green Eggs and Ham";
-    Song.forge(editSong)
-    .save()
+    Song.where({SongId})
+    .save({Title, SongLength, ReleaseDate, GenreId, ArtistId}, {method: 'update'})
     .then(()=> res.status(201).json({"msg": "Song editted"}))
     .catch((error) => {
       next(error)
     })
-  })
-  .catch((err)=> {
-    next(err);
-  })
+
 }
 
 
