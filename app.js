@@ -7,6 +7,9 @@ let app = express();
 let routes = require('./routes/')
 // <Include the router index file>
 
+
+app.set('view engine', 'pug');
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 
